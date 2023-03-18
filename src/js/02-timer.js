@@ -1,5 +1,6 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const refs = {
   datetimePicker: document.querySelector('input[type="text"]'),
@@ -23,7 +24,12 @@ const options = {
   onClose(selectedDates) {
     if (selectedDates[0] <= options.defaultDate) {
       refs.startBtn.disabled = true;
-      return alert('Please choose a date in the future');
+      //   return alert('Please choose a date in the future');
+      return Report.warning(
+        'Warning',
+        'Please choose a date in the future',
+        'Ok'
+      );
     }
     refs.startBtn.disabled = false;
     selectedTime = selectedDates[0];
@@ -50,7 +56,11 @@ const timer = {
         seconds === '00'
       ) {
         this.stop();
-        console.log('putin is died. Glory to Ukraine!');
+        Report.success(
+          "We've been waiting for it!",
+          'putin is died. Glory to Ukraine!',
+          'Glory to Heroes!'
+        );
       }
     }, 1000);
   },
