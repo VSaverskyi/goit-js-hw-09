@@ -43,8 +43,17 @@ const timer = {
   start() {
     this.intervalId = setInterval(() => {
       const currentTime = Date.now();
-      const getDeltaTime = convertMs(selectedTime - currentTime);
+      const deltaTime = selectedTime - currentTime;
+      const getDeltaTime = convertMs(deltaTime);
       const { days, hours, minutes, seconds } = getDeltaTime;
+      if (deltaTime < 0) {
+        this.stop();
+        return Report.warning(
+          'Warning',
+          'Please choose a date in the future',
+          'Ok'
+        );
+      }
       refs.daysValue.textContent = days;
       refs.hoursValue.textContent = hours;
       refs.minutesValue.textContent = minutes;
