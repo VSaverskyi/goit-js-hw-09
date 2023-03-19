@@ -71,6 +71,7 @@ const timer = {
 
 addTimerStyles();
 refs.startBtn.addEventListener('click', () => {
+  refs.startBtn.disabled = true;
   timer.start();
 });
 
